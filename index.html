@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valeurs des temps de l'indicatif</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --present:#e8f4f8;--present-accent:#2196a8;
+  --passe:#fdecea;--passe-accent:#c0392b;
+  --imparfait:#fef9e7;--imparfait-accent:#d4a017;
+  --futur:#eafaf1;--futur-accent:#27ae60;
+  --bg:#f8f7f2;--text:#1a1a2e;--card:#fff;
+  --radius:16px;--shadow:0 4px 24px rgba(0,0,0,0.09);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--text);padding:30px 16px;min-height:100vh}
+h1{font-family:'Playfair Display',serif;text-align:center;font-size:2rem;margin-bottom:6px;color:var(--text)}
+.subtitle{text-align:center;color:#666;margin-bottom:30px;font-size:1rem}
+
+/* MINDMAP */
+.mindmap{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-bottom:40px}
+.branch{border-radius:var(--radius);padding:20px 22px;width:270px;box-shadow:var(--shadow);cursor:pointer;transition:transform .2s,box-shadow .2s;border:2px solid transparent}
+.branch:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,0.14)}
+.branch h2{font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:8px}
+.present{background:var(--present);border-color:var(--present-accent)}
+.present h2{color:var(--present-accent)}
+.passe{background:var(--passe);border-color:var(--passe-accent)}
+.passe h2{color:var(--passe-accent)}
+.imparfait{background:var(--imparfait);border-color:var(--imparfait-accent)}
+.imparfait h2{color:var(--imparfait-accent)}
+.futur{background:var(--futur);border-color:var(--futur-accent)}
+.futur h2{color:var(--futur-accent)}
+.branch ul{padding-left:18px;line-height:1.9}
+.example{font-style:italic;opacity:.75;font-size:.92rem}
+.hidden{display:none}
+.toggle-hint{font-size:.8rem;color:#888;float:right;margin-top:2px}
+
+/* TABS */
+.tabs-container{max-width:800px;margin:0 auto 50px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;justify-content:center}
+.tab-btn{padding:9px 20px;border:2px solid #ddd;border-radius:30px;background:white;cursor:pointer;font-family:'Source Sans 3',sans-serif;font-size:.95rem;font-weight:600;transition:.2s;color:#555}
+.tab-btn.active{background:var(--text);color:white;border-color:var(--text)}
+.tab-btn:hover:not(.active){border-color:var(--text);color:var(--text)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* SHARED CARD */
+.exercise-card{background:var(--card);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow)}
+.exercise-card h3{font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:6px}
+.exercise-card .instructions{color:#666;margin-bottom:22px;font-size:.95rem}
+
+/* QCM */
+.qcm-question{margin-bottom:28px;padding-bottom:22px;border-bottom:1px solid #eee}
+.qcm-question:last-child{border-bottom:none;margin-bottom:0}
+.qcm-question p{font-weight:600;margin-bottom:12px;font-size:1rem;line-height:1.5}
+.qcm-options{display:flex;flex-direction:column;gap:8px}
+.qcm-option{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;border:2px solid #e8e8e8;cursor:pointer;transition:.15s;background:white}
+.qcm-option:hover{border-color:#aaa;background:#fafafa}
+.qcm-option input{accent-color:var(--text);width:16px;height:16px}
+.qcm-option.correct-ans{border-color:#27ae60;background:#eafaf1}
+.qcm-option.wrong-ans{border-color:#e74c3c;background:#fdecea}
+.qcm-feedback{margin-top:8px;font-size:.9rem;font-weight:600;min-height:20px}
+.qcm-feedback.ok{color:#27ae60}
+.qcm-feedback.ko{color:#e74c3c}
+
+/* BOUTONS */
+.btn{padding:10px 22px;border:none;border-radius:10px;cursor:pointer;font-family:'Source Sans 3',sans-serif;font-size:.95rem;font-weight:600;transition:.2s}
+.btn-primary{background:var(--text);color:white}
+.btn-primary:hover{opacity:.85}
+.btn-reset{background:#eee;color:var(--text)}
+.btn-reset:hover{background:#ddd}
+.btn-row{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+
+/* SCORE */
+.score-bar{height:8px;border-radius:99px;background:#eee;overflow:hidden;margin:10px 0}
+.score-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#27ae60,#2ecc71);transition:width .5s}
+
+/* DRAG & DROP */
+.dd-container{display:flex;flex-direction:column;gap:20px}
+.dd-sentences{display:flex;flex-direction:column;gap:10px}
+.dd-sentence{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 14px;border-radius:12px;background:#f9f9f9;border:2px dashed #ddd}
+.dd-sentence-text{font-size:.97rem;flex:1;min-width:200px}
+.dd-dropzone{min-width:160px;min-height:38px;border:2px dashed #bbb;border-radius:10px;padding:6px 10px;background:white;text-align:center;font-size:.88rem;color:#aaa;transition:.2s;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.dd-dropzone.dragover{border-color:var(--present-accent);background:#e8f4f8}
+.dd-dropzone.filled{border-style:solid;color:var(--text);font-weight:600;font-size:.9rem}
+.dd-dropzone.filled.correct{border-color:#27ae60;background:#eafaf1;color:#27ae60}
+.dd-dropzone.filled.wrong{border-color:#e74c3c;background:#fdecea;color:#e74c3c}
+.dd-bank{display:flex;gap:10px;flex-wrap:wrap;padding:16px;border-radius:12px;background:#f0f0f0;min-height:56px}
+.dd-tag{padding:8px 14px;border-radius:30px;background:white;border:2px solid #ccc;cursor:grab;font-size:.9rem;font-weight:600;user-select:none;transition:.2s;box-shadow:0 2px 6px rgba(0,0,0,0.07)}
+.dd-tag:hover{border-color:#555;box-shadow:0 4px 10px rgba(0,0,0,0.12)}
+.dd-tag.dragging{opacity:.4}
+.dd-tag.used{display:none}
+.dd-bank-label{font-size:.85rem;color:#888;width:100%;margin-bottom:4px}
+
+/* RÉÉCRITURE */
+.rewrite-block{margin-bottom:20px}
+.rewrite-block p{margin-bottom:10px;font-size:.97rem;line-height:1.6}
+.rewrite-block .original{padding:12px 16px;background:#f5f5f5;border-radius:10px;border-left:4px solid #bbb;font-style:italic;margin-bottom:12px}
+.rewrite-block textarea{width:100%;padding:12px;border:2px solid #e0e0e0;border-radius:10px;font-family:'Source Sans 3',sans-serif;font-size:.95rem;resize:vertical;min-height:80px;transition:.2s}
+.rewrite-block textarea:focus{outline:none;border-color:var(--present-accent)}
+.rewrite-correction{margin-top:10px;padding:10px 14px;border-radius:10px;background:#eafaf1;border:1px solid #a8dbb7;font-size:.9rem;display:none}
+.rewrite-correction.visible{display:block}
+
+/* TEXTE LACUNAIRE */
+.fill-text{font-size:1rem;line-height:2.2;padding:16px;background:#f9f9f9;border-radius:12px;margin-bottom:16px}
+.fill-blank{display:inline-block;border-bottom:2px solid var(--text);min-width:100px;text-align:center;padding:0 6px;cursor:pointer;font-weight:600;color:var(--present-accent);position:relative}
+.fill-select{font-family:'Source Sans 3',sans-serif;font-size:.95rem;border:none;border-bottom:2px solid var(--text);background:transparent;cursor:pointer;color:var(--present-accent);font-weight:600;outline:none;padding:2px 4px}
+.fill-select.correct-sel{color:#27ae60;border-bottom-color:#27ae60}
+.fill-select.wrong-sel{color:#e74c3c;border-bottom-color:#e74c3c}
+
+/* PROGRESS */
+.progress-section{max-width:800px;margin:0 auto 30px;padding:18px 24px;background:white;border-radius:var(--radius);box-shadow:var(--shadow);display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.progress-section span{font-size:.9rem;color:#666}
+.progress-section strong{color:var(--text)}
+
+@media(max-width:600px){
+  h1{font-size:1.5rem}
+  .branch{width:100%}
+  .tabs{gap:6px}
+  .tab-btn{padding:7px 14px;font-size:.85rem}
+}
+</style>
+</head>
+<body>
+
+<h1>Valeurs des temps simples de l'indicatif</h1>
+<p class="subtitle">Explore la carte, puis entraîne-toi avec les exercices ✨</p>
+
+<!-- CARTE MENTALE -->
+<div class="mindmap">
+  <div class="branch present" onclick="toggle('p1')">
+    <h2>Présent <span class="toggle-hint">▾</span></h2>
+    <ul id="p1" class="hidden">
+      <li>Énonciation – <span class="example">Ils préparent leur voyage.</span></li>
+      <li>Habitude – <span class="example">Nous allons nager tous les dimanches.</span></li>
+      <li>Vérité générale – <span class="example">Qui vole un œuf vole un bœuf.</span></li>
+      <li>Futur proche – <span class="example">Je le fais dans deux minutes.</span></li>
+      <li>Présent historique – <span class="example">Il court la relever.</span></li>
+      <li>Passé proche – <span class="example">Tu viens de le manquer.</span></li>
+      <li>Duratif – <span class="example">Elle est avocate depuis un an.</span></li>
+    </ul>
+  </div>
+  <div class="branch passe" onclick="toggle('p2')">
+    <h2>Passé simple <span class="toggle-hint">▾</span></h2>
+    <ul id="p2" class="hidden">
+      <li>Action ponctuelle – <span class="example">Hier fut une mauvaise journée.</span></li>
+      <li>Action brève – <span class="example">Elle fut interrompue.</span></li>
+      <li>Actions successives – <span class="example">Je pris un médicament, me couchai et m'endormis.</span></li>
+    </ul>
+  </div>
+  <div class="branch imparfait" onclick="toggle('p3')">
+    <h2>Imparfait <span class="toggle-hint">▾</span></h2>
+    <ul id="p3" class="hidden">
+      <li>Description – <span class="example">Il faisait beau.</span></li>
+      <li>Durée longue – <span class="example">Nous rêvassions pendant des heures.</span></li>
+      <li>Habitude – <span class="example">Le chat miaulait.</span></li>
+      <li>Hypothèse – <span class="example">Si vous saviez…</span></li>
+    </ul>
+  </div>
+  <div class="branch futur" onclick="toggle('p4')">
+    <h2>Futur simple <span class="toggle-hint">▾</span></h2>
+    <ul id="p4" class="hidden">
+      <li>Avenir – <span class="example">Vous partirez demain.</span></li>
+      <li>Ordre – <span class="example">Tu rangeras.</span></li>
+      <li>Habitude future – <span class="example">Il s'entraînera tous les samedis.</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- EXERCICES -->
+<div class="tabs-container">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('qcm',this)">🔘 QCM</button>
+    <button class="tab-btn" onclick="switchTab('dragdrop',this)">🔀 Glisser-déposer</button>
+    <button class="tab-btn" onclick="switchTab('lacunaire',this)">✍️ Texte à trous</button>
+    <button class="tab-btn" onclick="switchTab('rewrite',this)">📝 Réécriture</button>
+  </div>
+
+  <!-- ===== QCM ===== -->
+  <div id="tab-qcm" class="tab-panel active">
+    <div class="exercise-card">
+      <h3>QCM – Identifie la valeur du temps</h3>
+      <p class="instructions">Lis chaque phrase, puis coche la valeur qui correspond au temps en gras.</p>
+      <div id="qcm-body"></div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="checkQcm()">Vérifier mes réponses</button>
+        <button class="btn btn-reset" onclick="resetQcm()">Recommencer</button>
+      </div>
+      <div id="qcm-score" style="margin-top:16px;display:none">
+        <p id="qcm-score-text" style="font-weight:600;margin-bottom:6px"></p>
+        <div class="score-bar"><div class="score-fill" id="qcm-fill"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== DRAG & DROP ===== -->
+  <div id="tab-dragdrop" class="tab-panel">
+    <div class="exercise-card">
+      <h3>Glisser-déposer – Associe chaque phrase à sa valeur</h3>
+      <p class="instructions">Fais glisser une étiquette depuis la banque et dépose-la sur la phrase correspondante. Sur mobile, appuie sur une étiquette puis sur la zone cible.</p>
+      <div class="dd-container">
+        <div class="dd-sentences" id="dd-sentences"></div>
+        <div class="dd-bank">
+          <div class="dd-bank-label">📦 Banque d'étiquettes</div>
+          <div id="dd-tags"></div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="checkDd()">Vérifier</button>
+        <button class="btn btn-reset" onclick="resetDd()">Recommencer</button>
+      </div>
+      <div id="dd-score" style="margin-top:14px;font-weight:600;display:none"></div>
+    </div>
+  </div>
+
+  <!-- ===== TEXTE LACUNAIRE ===== -->
+  <div id="tab-lacunaire" class="tab-panel">
+    <div class="exercise-card">
+      <h3>Texte à trous – Choisis le bon temps</h3>
+      <p class="instructions">Sélectionne dans chaque liste déroulante le temps qui convient selon le contexte.</p>
+      <div class="fill-text" id="fill-text"></div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="checkFill()">Vérifier</button>
+        <button class="btn btn-reset" onclick="resetFill()">Recommencer</button>
+      </div>
+      <div id="fill-score" style="margin-top:14px;font-weight:600;display:none"></div>
+    </div>
+  </div>
+
+  <!-- ===== RÉÉCRITURE ===== -->
+  <div id="tab-rewrite" class="tab-panel">
+    <div class="exercise-card">
+      <h3>Réécriture – Change le temps des verbes</h3>
+      <p class="instructions">Réécris chaque phrase au temps demandé, puis clique sur « Voir la correction ».</p>
+      <div id="rewrite-body"></div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="toggleAll()">Voir toutes les corrections</button>
+        <button class="btn btn-reset" onclick="resetRewrite()">Effacer mes réponses</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ── MINDMAP ──────────────────────────────────────────────
+function toggle(id){
+  const el=document.getElementById(id);
+  el.classList.toggle('hidden');
+}
+
+// ── TABS ─────────────────────────────────────────────────
+function switchTab(name,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ═══════════════════════════════════════════════════════
+// QCM DATA
+// ═══════════════════════════════════════════════════════
+const qcmData=[
+  {phrase:"<strong>Le Soleil se lève</strong> à l'est.",
+   options:["Vérité générale","Habitude","Futur proche","Présent historique"],answer:0},
+  {phrase:"Hier, Napoléon <strong>entra</strong> dans Moscou.",
+   options:["Habitude passée","Description","Présent historique (passé simple)","Action successive"],answer:2},
+  {phrase:"Enfant, elle <strong>dessinait</strong> pendant des heures.",
+   options:["Habitude à l'imparfait","Description","Action ponctuelle","Ordre"],answer:0},
+  {phrase:"Tu <strong>viendras</strong> me voir demain.",
+   options:["Habitude future","Vérité générale","Avenir (futur simple)","Ordre"],answer:2},
+  {phrase:"Il <strong>prit</strong> son manteau, <strong>sortit</strong> et <strong>claqua</strong> la porte.",
+   options:["Description","Actions successives (passé simple)","Habitude","Durée longue"],answer:1},
+  {phrase:"Je <strong>pars</strong> dans cinq minutes.",
+   options:["Énonciation","Présent duratif","Futur proche (présent)","Vérité générale"],answer:2},
+  {phrase:"Si tu <strong>savais</strong> ce que j'ai vécu…",
+   options:["Description","Hypothèse (imparfait)","Habitude","Action brève"],answer:1},
+  {phrase:"<strong>Rangeras</strong>-tu ta chambre ce soir ?",
+   options:["Avenir","Habitude future","Ordre (futur)","Vérité générale"],answer:2},
+];
+
+function buildQcm(){
+  const body=document.getElementById('qcm-body');
+  body.innerHTML=qcmData.map((q,i)=>`
+    <div class="qcm-question" id="qq-${i}">
+      <p>${i+1}. ${q.phrase}</p>
+      <div class="qcm-options">
+        ${q.options.map((o,j)=>`
+          <label class="qcm-option" id="qopt-${i}-${j}">
+            <input type="radio" name="q${i}" value="${j}"> ${o}
+          </label>`).join('')}
+      </div>
+      <div class="qcm-feedback" id="qfb-${i}"></div>
+    </div>`).join('');
+}
+buildQcm();
+
+function checkQcm(){
+  let score=0;
+  qcmData.forEach((q,i)=>{
+    const sel=document.querySelector(`input[name="q${i}"]:checked`);
+    const fb=document.getElementById(`qfb-${i}`);
+    if(!sel){fb.textContent='⚠ Choisis une réponse.';fb.className='qcm-feedback ko';return;}
+    const chosen=parseInt(sel.value);
+    document.querySelectorAll(`#qq-${i} .qcm-option`).forEach(el=>el.classList.remove('correct-ans','wrong-ans'));
+    document.getElementById(`qopt-${i}-${q.answer}`).classList.add('correct-ans');
+    if(chosen===q.answer){score++;fb.textContent='✔ Bonne réponse !';fb.className='qcm-feedback ok';}
+    else{document.getElementById(`qopt-${i}-${chosen}`).classList.add('wrong-ans');fb.textContent='✘ Pas tout à fait.';fb.className='qcm-feedback ko';}
+    document.querySelectorAll(`input[name="q${i}"]`).forEach(r=>r.disabled=true);
+  });
+  const pct=Math.round(score/qcmData.length*100);
+  document.getElementById('qcm-score').style.display='block';
+  document.getElementById('qcm-score-text').textContent=`Score : ${score} / ${qcmData.length} (${pct}%)`;
+  document.getElementById('qcm-fill').style.width=pct+'%';
+}
+function resetQcm(){document.getElementById('qcm-score').style.display='none';buildQcm();}
+
+// ═══════════════════════════════════════════════════════
+// DRAG & DROP DATA
+// ═══════════════════════════════════════════════════════
+const ddData=[
+  {sentence:"Le chat <em>dormait</em> sur le canapé depuis le matin.",answer:"Imparfait – durée longue"},
+  {sentence:"Elle <em>chanta</em> d'une voix claire et s'arrêta.",answer:"Passé simple – action brève"},
+  {sentence:"Chaque été, ils <em>partaient</em> en vacances.",answer:"Imparfait – habitude"},
+  {sentence:"Tu <em>feras</em> la vaisselle avant de sortir.",answer:"Futur – ordre"},
+  {sentence:"Il <em>fait</em> beau depuis ce matin.",answer:"Présent – duratif"},
+  {sentence:"La neige <em>tombait</em>, les enfants criaient de joie.",answer:"Imparfait – description"},
+];
+const ddLabels=[
+  "Imparfait – durée longue","Passé simple – action brève","Imparfait – habitude",
+  "Futur – ordre","Présent – duratif","Imparfait – description"
+];
+
+let ddSelected=null;
+
+function buildDd(){
+  const sentences=document.getElementById('dd-sentences');
+  const tagsDiv=document.getElementById('dd-tags');
+  sentences.innerHTML=ddData.map((d,i)=>`
+    <div class="dd-sentence">
+      <span class="dd-sentence-text">${i+1}. ${d.sentence}</span>
+      <div class="dd-dropzone" id="dz-${i}" data-idx="${i}" onclick="dropOnZone(this)">Dépose ici</div>
+    </div>`).join('');
+  const shuffled=[...ddLabels].sort(()=>Math.random()-.5);
+  tagsDiv.innerHTML=shuffled.map(l=>`
+    <span class="dd-tag" draggable="true" data-label="${l}"
+      ondragstart="dragStart(event)"
+      ondragend="dragEnd(event)"
+      onclick="selectTag(this)">${l}</span>`).join('');
+  document.querySelectorAll('.dd-dropzone').forEach(dz=>{
+    dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('dragover')});
+    dz.addEventListener('dragleave',()=>dz.classList.remove('dragover'));
+    dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('dragover');doDropOnZone(dz)});
+  });
+  document.getElementById('dd-score').style.display='none';
+  ddSelected=null;
+}
+buildDd();
+
+function dragStart(e){ddSelected=e.currentTarget;e.currentTarget.classList.add('dragging');}
+function dragEnd(e){e.currentTarget.classList.remove('dragging');}
+function selectTag(el){
+  if(el.classList.contains('used'))return;
+  document.querySelectorAll('.dd-tag').forEach(t=>t.style.outline='');
+  el.style.outline='3px solid #333';
+  ddSelected=el;
+}
+function dropOnZone(dz){if(ddSelected)doDropOnZone(dz);}
+function doDropOnZone(dz){
+  if(!ddSelected)return;
+  const label=ddSelected.dataset.label;
+  // return old tag to bank if zone already filled
+  const prev=dz.dataset.current;
+  if(prev){
+    document.querySelectorAll('.dd-tag').forEach(t=>{
+      if(t.dataset.label===prev){t.classList.remove('used');t.style.display='';}
+    });
+  }
+  dz.textContent=label;
+  dz.dataset.current=label;
+  dz.classList.add('filled');
+  dz.classList.remove('correct','wrong','dragover');
+  ddSelected.classList.add('used');
+  ddSelected.style.outline='';
+  ddSelected=null;
+}
+function checkDd(){
+  let score=0;
+  ddData.forEach((d,i)=>{
+    const dz=document.getElementById(`dz-${i}`);
+    if(!dz.dataset.current)return;
+    dz.classList.remove('correct','wrong');
+    if(dz.dataset.current===d.answer){score++;dz.classList.add('correct');}
+    else{dz.classList.add('wrong');}
+  });
+  const el=document.getElementById('dd-score');
+  el.style.display='block';
+  el.textContent=`Score : ${score} / ${ddData.length}`;
+  el.style.color=score===ddData.length?'#27ae60':'#c0392b';
+}
+function resetDd(){buildDd();}
+
+// ═══════════════════════════════════════════════════════
+// TEXTE LACUNAIRE
+// ═══════════════════════════════════════════════════════
+const fillSegments=[
+  {type:'text',text:"Ce matin-là, le ciel "},
+  {type:'blank',options:["était","est","sera","fut"],answer:"était"},
+  {type:'text',text:" gris et il "},
+  {type:'blank',options:["pleuvait","pleut","pleutra","plut"],answer:"pleuvait"},
+  {type:'text',text:" sans discontinuer. Paul "},
+  {type:'blank',options:["prit","prend","prenait","prendra"],answer:"prit"},
+  {type:'text',text:" son imperméable et "},
+  {type:'blank',options:["sortit","sort","sortait","sortira"],answer:"sortit"},
+  {type:'text',text:" rapidement. Dans la rue, les passants "},
+  {type:'blank',options:["couraient","courent","coururent","courront"],answer:"couraient"},
+  {type:'text',text:" sous les auvents. Il "},
+  {type:'blank',options:["se dit","se disait","se dira","se dirait"],answer:"se dit"},
+  {type:'text',text:" qu'il "},
+  {type:'blank',options:["reviendra","revenait","revint","revient"],answer:"reviendra"},
+  {type:'text',text:" plus tôt le soir prochain."},
+];
+
+function buildFill(){
+  const container=document.getElementById('fill-text');
+  container.innerHTML=fillSegments.map((s,i)=>{
+    if(s.type==='text')return s.text;
+    const opts=s.options.map(o=>`<option value="${o}">${o}</option>`).join('');
+    return `<select class="fill-select" id="fs-${i}" onchange="this.classList.remove('correct-sel','wrong-sel')"><option value="">…</option>${opts}</select>`;
+  }).join('');
+  document.getElementById('fill-score').style.display='none';
+}
+buildFill();
+
+function checkFill(){
+  let score=0,total=0;
+  fillSegments.forEach((s,i)=>{
+    if(s.type!=='blank')return;
+    total++;
+    const sel=document.getElementById(`fs-${i}`);
+    sel.classList.remove('correct-sel','wrong-sel');
+    if(sel.value===s.answer){score++;sel.classList.add('correct-sel');}
+    else if(sel.value){sel.classList.add('wrong-sel');}
+  });
+  const el=document.getElementById('fill-score');
+  el.style.display='block';
+  el.textContent=`Score : ${score} / ${total}`;
+  el.style.color=score===total?'#27ae60':'#c0392b';
+}
+function resetFill(){buildFill();}
+
+// ═══════════════════════════════════════════════════════
+// RÉÉCRITURE
+// ═══════════════════════════════════════════════════════
+const rewriteData=[
+  {instruction:"Réécris au <strong>passé simple</strong> (actions successives) :",
+   original:"Il prend son sac, il monte dans le bus et il trouve une place.",
+   correction:"Il prit son sac, monta dans le bus et trouva une place."},
+  {instruction:"Réécris à l'<strong>imparfait</strong> pour décrire une habitude :",
+   original:"Chaque matin, elle boit un café et écoute la radio.",
+   correction:"Chaque matin, elle buvait un café et écoutait la radio."},
+  {instruction:"Réécris au <strong>futur simple</strong> :",
+   original:"Demain, vous partez tôt et vous prenez le train de 7h.",
+   correction:"Demain, vous partirez tôt et vous prendrez le train de 7h."},
+  {instruction:"Réécris au <strong>présent historique</strong> pour donner de la vivacité :",
+   original:"En 1789, le peuple prit la Bastille.",
+   correction:"En 1789, le peuple prend la Bastille."},
+];
+
+function buildRewrite(){
+  const body=document.getElementById('rewrite-body');
+  body.innerHTML=rewriteData.map((r,i)=>`
+    <div class="rewrite-block">
+      <p>${i+1}. ${r.instruction}</p>
+      <div class="original">${r.original}</div>
+      <textarea id="rw-${i}" placeholder="Ta réécriture ici…"></textarea>
+      <div style="margin-top:6px">
+        <button class="btn btn-reset" style="font-size:.85rem;padding:6px 14px" onclick="toggleCorrection(${i})">Voir la correction</button>
+      </div>
+      <div class="rewrite-correction" id="rc-${i}">✔ <strong>Correction :</strong> ${r.correction}</div>
+    </div>`).join('');
+}
+buildRewrite();
+
+function toggleCorrection(i){
+  const el=document.getElementById(`rc-${i}`);
+  el.classList.toggle('visible');
+}
+function toggleAll(){
+  rewriteData.forEach((_,i)=>document.getElementById(`rc-${i}`).classList.add('visible'));
+}
+function resetRewrite(){buildRewrite();}
+</script>
+</body>
+</html>
