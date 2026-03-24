@@ -121,12 +121,113 @@ h1{font-family:'Playfair Display',serif;text-align:center;font-size:2rem;margin-
   .tabs{gap:6px}
   .tab-btn{padding:7px 14px;font-size:.85rem}
 }
+
+/* VRAI / FAUX */
+.vf-item{margin-bottom:22px;padding-bottom:20px;border-bottom:1px solid #eee}
+.vf-item:last-child{border-bottom:none}
+.vf-statement{font-weight:600;font-size:1rem;line-height:1.5;margin-bottom:12px}
+.vf-btns{display:flex;gap:10px}
+.vf-btn{padding:8px 22px;border-radius:30px;border:2px solid #ddd;background:white;cursor:pointer;font-family:'Source Sans 3',sans-serif;font-size:.95rem;font-weight:600;transition:.2s}
+.vf-btn:hover{border-color:#555}
+.vf-btn.selected-v{border-color:#27ae60;background:#eafaf1;color:#27ae60}
+.vf-btn.selected-f{border-color:#e74c3c;background:#fdecea;color:#e74c3c}
+.vf-btn.correct-vf{border-color:#27ae60;background:#eafaf1;color:#27ae60}
+.vf-btn.wrong-vf{border-color:#e74c3c;background:#fdecea;color:#e74c3c}
+.vf-explication{margin-top:10px;font-size:.9rem;padding:8px 12px;border-radius:8px;background:#f5f5f5;display:none;line-height:1.5}
+.vf-explication.visible{display:block}
+
+/* REMETTRE EN ORDRE */
+.ordre-item{margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid #eee}
+.ordre-item:last-child{border-bottom:none}
+.ordre-label{font-weight:600;margin-bottom:10px;font-size:.97rem}
+.ordre-zone{min-height:44px;display:flex;flex-wrap:wrap;gap:8px;padding:10px;border-radius:12px;border:2px dashed #ccc;background:#fafafa;margin-bottom:10px}
+.ordre-zone.correct-zone{border-color:#27ae60;background:#eafaf1}
+.ordre-zone.wrong-zone{border-color:#e74c3c;background:#fdecea}
+.ordre-bank{display:flex;flex-wrap:wrap;gap:8px;min-height:36px}
+.ordre-word{padding:7px 13px;border-radius:20px;background:white;border:2px solid #ccc;cursor:pointer;font-size:.95rem;font-weight:600;user-select:none;transition:.2s;box-shadow:0 2px 5px rgba(0,0,0,0.06)}
+.ordre-word:hover{border-color:#555;transform:translateY(-2px)}
+.ordre-word.in-zone{background:#e8f4f8;border-color:var(--present-accent);color:var(--present-accent)}
+.ordre-feedback{font-size:.88rem;font-weight:600;margin-top:6px;min-height:18px}
+.correction-text{font-size:.88rem;color:#666;font-style:italic;margin-top:6px;display:none}
+.correction-text.visible{display:block}
+
+/* CONJUGAISON */
+.conj-item{margin-bottom:22px;padding-bottom:20px;border-bottom:1px solid #eee}
+.conj-item:last-child{border-bottom:none}
+.conj-sentence{font-size:1rem;line-height:2;margin-bottom:4px}
+.conj-hint{font-size:.85rem;color:#888;margin-bottom:8px}
+.conj-input{padding:7px 12px;border:2px solid #e0e0e0;border-radius:10px;font-family:'Source Sans 3',sans-serif;font-size:.95rem;width:180px;transition:.2s;outline:none}
+.conj-input:focus{border-color:var(--present-accent)}
+.conj-input.correct-inp{border-color:#27ae60;background:#eafaf1;color:#27ae60}
+.conj-input.wrong-inp{border-color:#e74c3c;background:#fdecea;color:#e74c3c}
+.conj-feedback{font-size:.88rem;font-weight:600;margin-top:6px;min-height:18px}
+
+/* BARRE DE PROGRESSION GLOBALE */
+.global-progress{max-width:800px;margin:0 auto 28px;background:white;border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 26px}
+.gp-title{font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:14px;color:var(--text)}
+.gp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-bottom:16px}
+.gp-cell{padding:10px 14px;border-radius:10px;background:#f5f5f5;display:flex;align-items:center;gap:10px}
+.gp-cell .gp-icon{font-size:1.3rem;min-width:26px;text-align:center}
+.gp-cell .gp-info{flex:1}
+.gp-cell .gp-name{font-size:.85rem;font-weight:600;color:#555;margin-bottom:3px}
+.gp-cell .gp-val{font-size:.8rem;color:#888}
+.gp-cell.done{background:#eafaf1}.gp-cell.done .gp-name{color:#1e8449}
+.total-bar-wrap{margin-top:4px}
+.total-bar-label{display:flex;justify-content:space-between;font-size:.85rem;color:#666;margin-bottom:5px}
+.total-bar{height:10px;border-radius:99px;background:#eee;overflow:hidden}
+.total-bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#2196a8,#27ae60);transition:width .6s}
+
+/* DIPLÔMES */
+.diplomes-section{max-width:800px;margin:0 auto 50px;background:white;border-radius:var(--radius);box-shadow:var(--shadow);padding:26px}
+.diplomes-section h2{font-family:'Playfair Display',serif;font-size:1.25rem;margin-bottom:6px}
+.diplomes-section .dip-sub{color:#666;font-size:.93rem;margin-bottom:20px}
+.diplomes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+.diplome-card{border-radius:14px;padding:18px 16px;text-align:center;border:2px solid #e8e8e8;background:#fafafa;transition:.2s;position:relative;overflow:hidden}
+.diplome-card.unlocked{border-color:transparent;background:linear-gradient(135deg,#fff9e6,#fff3cc);box-shadow:0 4px 18px rgba(212,160,23,.2)}
+.diplome-card.unlocked::before{content:'';position:absolute;inset:0;border-radius:12px;border:2px solid #d4a017;pointer-events:none}
+.diplome-card .d-medal{font-size:2.4rem;margin-bottom:8px;filter:grayscale(1);transition:filter .4s}
+.diplome-card.unlocked .d-medal{filter:none}
+.diplome-card .d-name{font-family:'Playfair Display',serif;font-size:.95rem;color:#333;margin-bottom:4px}
+.diplome-card.unlocked .d-name{color:#8a6200}
+.diplome-card .d-cond{font-size:.78rem;color:#aaa;line-height:1.4}
+.diplome-card.unlocked .d-cond{color:#b8860b}
+.diplome-card .d-date{font-size:.72rem;color:#27ae60;font-weight:600;margin-top:6px;display:none}
+.diplome-card.unlocked .d-date{display:block}
+.d-new-badge{position:absolute;top:10px;right:10px;background:#e74c3c;color:white;font-size:.65rem;font-weight:700;padding:2px 7px;border-radius:99px;letter-spacing:.03em;display:none}
+.diplome-card.just-unlocked .d-new-badge{display:block}
+
+/* MODAL DIPLÔME */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:999;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.modal-overlay.visible{opacity:1;pointer-events:all}
+.modal-box{background:white;border-radius:24px;padding:36px 32px;max-width:420px;width:90%;text-align:center;transform:scale(.85);transition:transform .3s;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.modal-overlay.visible .modal-box{transform:scale(1)}
+.modal-medal{font-size:4rem;margin-bottom:12px}
+.modal-title{font-family:'Playfair Display',serif;font-size:1.5rem;color:#8a6200;margin-bottom:6px}
+.modal-sub{color:#666;font-size:.95rem;margin-bottom:20px;line-height:1.5}
+.modal-close{padding:10px 28px;background:var(--text);color:white;border:none;border-radius:10px;font-family:'Source Sans 3',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer}
+@keyframes pop{0%{transform:scale(.5);opacity:0}70%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}
+.pop{animation:pop .45s ease-out}
+
+@media(max-width:600px){
+  .diplomes-grid{grid-template-columns:1fr 1fr}
+  .gp-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
 
 <h1>Valeurs des temps simples de l'indicatif</h1>
 <p class="subtitle">Explore la carte, puis entraîne-toi avec les exercices ✨</p>
+
+<!-- BARRE DE PROGRESSION GLOBALE -->
+<div class="global-progress" id="global-progress">
+  <div class="gp-title">🎯 Ma progression</div>
+  <div class="gp-grid" id="gp-grid"></div>
+  <div class="total-bar-wrap">
+    <div class="total-bar-label"><span>Score total</span><span id="gp-total-label">0 / 0 pts</span></div>
+    <div class="total-bar"><div class="total-bar-fill" id="gp-total-fill" style="width:0%"></div></div>
+  </div>
+</div>
 
 <!-- CARTE MENTALE -->
 <div class="mindmap">
@@ -176,6 +277,9 @@ h1{font-family:'Playfair Display',serif;text-align:center;font-size:2rem;margin-
     <button class="tab-btn" onclick="switchTab('dragdrop',this)">🔀 Glisser-déposer</button>
     <button class="tab-btn" onclick="switchTab('lacunaire',this)">✍️ Texte à trous</button>
     <button class="tab-btn" onclick="switchTab('rewrite',this)">📝 Réécriture</button>
+    <button class="tab-btn" onclick="switchTab('vf',this)">✅ Vrai / Faux</button>
+    <button class="tab-btn" onclick="switchTab('ordre',this)">🔢 Remettre en ordre</button>
+    <button class="tab-btn" onclick="switchTab('conjugaison',this)">🖊️ Conjugaison</button>
   </div>
 
   <!-- ===== QCM ===== -->
@@ -242,6 +346,72 @@ h1{font-family:'Playfair Display',serif;text-align:center;font-size:2rem;margin-
     </div>
   </div>
 
+
+  <!-- ===== VRAI / FAUX ===== -->
+  <div id="tab-vf" class="tab-panel">
+    <div class="exercise-card">
+      <h3>Vrai / Faux – Affirmations sur les temps</h3>
+      <p class="instructions">Lis chaque affirmation et indique si elle est vraie ou fausse. Justifie ta réponse si tu peux !</p>
+      <div id="vf-body"></div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="checkVf()">Vérifier</button>
+        <button class="btn btn-reset" onclick="resetVf()">Recommencer</button>
+      </div>
+      <div id="vf-score" style="margin-top:14px;display:none">
+        <p id="vf-score-text" style="font-weight:600;margin-bottom:6px"></p>
+        <div class="score-bar"><div class="score-fill" id="vf-fill"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== REMETTRE EN ORDRE ===== -->
+  <div id="tab-ordre" class="tab-panel">
+    <div class="exercise-card">
+      <h3>Remettre en ordre – Reconstitue les phrases</h3>
+      <p class="instructions">Les mots d'une phrase sont mélangés. Clique dessus dans le bon ordre pour reconstituer la phrase correcte.</p>
+      <div id="ordre-body"></div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="checkOrdre()">Vérifier tout</button>
+        <button class="btn btn-reset" onclick="resetOrdre()">Recommencer</button>
+      </div>
+      <div id="ordre-score" style="margin-top:14px;font-weight:600;display:none"></div>
+    </div>
+  </div>
+
+  <!-- ===== CONJUGAISON ===== -->
+  <div id="tab-conjugaison" class="tab-panel">
+    <div class="exercise-card">
+      <h3>Conjugaison – Complète avec la bonne forme</h3>
+      <p class="instructions">Entre la forme conjuguée correcte du verbe indiqué entre parenthèses, au temps demandé.</p>
+      <div id="conj-body"></div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="checkConj()">Vérifier</button>
+        <button class="btn btn-reset" onclick="resetConj()">Recommencer</button>
+      </div>
+      <div id="conj-score" style="margin-top:14px;display:none">
+        <p id="conj-score-text" style="font-weight:600;margin-bottom:6px"></p>
+        <div class="score-bar"><div class="score-fill" id="conj-fill"></div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- DIPLÔMES -->
+<div class="diplomes-section">
+  <h2>🏅 Mes diplômes</h2>
+  <p class="dip-sub">Complète les exercices pour débloquer tes diplômes !</p>
+  <div class="diplomes-grid" id="diplomes-grid"></div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal-box">
+    <div class="modal-medal pop" id="modal-medal"></div>
+    <div class="modal-title" id="modal-title"></div>
+    <div class="modal-sub" id="modal-sub"></div>
+    <button class="modal-close" onclick="document.getElementById('modal-overlay').classList.remove('visible')">Super !</button>
+  </div>
 </div>
 
 <script>
@@ -491,7 +661,385 @@ function toggleCorrection(i){
 function toggleAll(){
   rewriteData.forEach((_,i)=>document.getElementById(`rc-${i}`).classList.add('visible'));
 }
-function resetRewrite(){buildRewrite();}
+// ═══════════════════════════════════════════════════════
+// VRAI / FAUX
+// ═══════════════════════════════════════════════════════
+const vfData=[
+  {statement:"Le passé simple s'utilise pour exprimer une habitude passée.",answer:false,
+   explication:"Faux. L'habitude passée se rend avec l'imparfait (ex. : « Il lisait chaque soir »). Le passé simple exprime des actions ponctuelles, brèves ou successives."},
+  {statement:"« Il pleuvait depuis deux heures » exprime une durée longue à l'imparfait.",answer:true,
+   explication:"Vrai. L'imparfait de durée longue traduit une action qui s'étend dans le passé sans limite nette."},
+  {statement:"Le futur simple peut s'utiliser pour donner un ordre.",answer:true,
+   explication:"Vrai. Ex. : « Tu finiras ton assiette ! » Le futur peut remplacer l'impératif pour un ordre atténué."},
+  {statement:"« La Terre tourne autour du Soleil » est un présent d'énonciation.",answer:false,
+   explication:"Faux. C'est un présent de vérité générale : il exprime un fait permanent et universel."},
+  {statement:"Au passé simple, on peut enchaîner plusieurs actions successives.",answer:true,
+   explication:"Vrai. Ex. : « Il entra, posa son sac et s'assit. » Les trois verbes marquent des actions qui se suivent chronologiquement."},
+  {statement:"L'imparfait peut exprimer une hypothèse dans une subordonnée conditionnelle.",answer:true,
+   explication:"Vrai. Ex. : « Si tu savais… » ou « Si j'avais le temps, je viendrais. » L'imparfait dans la proposition en « si » exprime une hypothèse."},
+  {statement:"« Je pars dans dix minutes » emploie le futur simple.",answer:false,
+   explication:"Faux. C'est le présent à valeur de futur proche. Le locuteur présente l'action comme déjà décidée et imminente."},
+  {statement:"Le passé simple peut exprimer une action unique et délimitée dans le temps.",answer:true,
+   explication:"Vrai. C'est la valeur d'action ponctuelle : ex. « La guerre éclata en 1914 »."},
+];
+
+function buildVf(){
+  const body=document.getElementById('vf-body');
+  body.innerHTML=vfData.map((v,i)=>`
+    <div class="vf-item" id="vfi-${i}">
+      <div class="vf-statement">${i+1}. ${v.statement}</div>
+      <div class="vf-btns">
+        <button class="vf-btn" id="vfv-${i}" onclick="selectVf(${i},true)">✔ Vrai</button>
+        <button class="vf-btn" id="vff-${i}" onclick="selectVf(${i},false)">✘ Faux</button>
+      </div>
+      <div class="vf-explication" id="vfexp-${i}">${v.explication}</div>
+    </div>`).join('');
+  document.getElementById('vf-score').style.display='none';
+}
+buildVf();
+
+const vfAnswers={};
+function selectVf(i,val){
+  vfAnswers[i]=val;
+  document.getElementById(`vfv-${i}`).className='vf-btn'+(val===true?' selected-v':'');
+  document.getElementById(`vff-${i}`).className='vf-btn'+(val===false?' selected-f':'');
+}
+
+function checkVf(){
+  let score=0;
+  vfData.forEach((v,i)=>{
+    const chosen=vfAnswers[i];
+    if(chosen===undefined)return;
+    const btnV=document.getElementById(`vfv-${i}`);
+    const btnF=document.getElementById(`vff-${i}`);
+    const exp=document.getElementById(`vfexp-${i}`);
+    btnV.className='vf-btn';btnF.className='vf-btn';
+    const correctBtn=v.answer?btnV:btnF;
+    const wrongBtn=v.answer?btnF:btnV;
+    correctBtn.classList.add('correct-vf');
+    if(chosen===v.answer){score++;}
+    else{wrongBtn.classList.add('wrong-vf');}
+    exp.classList.add('visible');
+    btnV.disabled=true;btnF.disabled=true;
+  });
+  const total=Object.keys(vfAnswers).length||vfData.length;
+  const pct=Math.round(score/vfData.length*100);
+  document.getElementById('vf-score').style.display='block';
+  document.getElementById('vf-score-text').textContent=`Score : ${score} / ${vfData.length} (${pct}%)`;
+  document.getElementById('vf-fill').style.width=pct+'%';
+}
+function resetVf(){Object.keys(vfAnswers).forEach(k=>delete vfAnswers[k]);buildVf();}
+
+// ═══════════════════════════════════════════════════════
+// REMETTRE EN ORDRE
+// ═══════════════════════════════════════════════════════
+const ordreData=[
+  {label:"Passé simple – actions successives",
+   words:["Il","saisit","la","lettre",",","la","lut","et","la","froissa"],
+   answer:"Il saisit la lettre , la lut et la froissa"},
+  {label:"Imparfait – description",
+   words:["Le","vent","soufflait",",","les","arbres","se","balançaient","doucement"],
+   answer:"Le vent soufflait , les arbres se balançaient doucement"},
+  {label:"Futur simple – ordre",
+   words:["Vous","rendrez","vos","copies","avant","midi"],
+   answer:"Vous rendrez vos copies avant midi"},
+  {label:"Présent – vérité générale",
+   words:["L'eau","gèle","à","zéro","degré"],
+   answer:"L'eau gèle à zéro degré"},
+  {label:"Imparfait – hypothèse",
+   words:["Si","vous","veniez","plus","tôt",",","nous","pourrions","discuter"],
+   answer:"Si vous veniez plus tôt , nous pourrions discuter"},
+];
+
+function buildOrdre(){
+  const body=document.getElementById('ordre-body');
+  body.innerHTML=ordreData.map((o,i)=>{
+    const shuffled=[...o.words].sort(()=>Math.random()-.5);
+    return `
+    <div class="ordre-item" id="oi-${i}">
+      <div class="ordre-label">${i+1}. <em>${o.label}</em></div>
+      <div class="ordre-zone" id="oz-${i}" onclick="zoneClick(${i})"></div>
+      <div class="ordre-bank" id="ob-${i}">
+        ${shuffled.map((w,j)=>`<span class="ordre-word" id="ow-${i}-${j}" data-word="${w}" data-orig="${j}" onclick="wordClick(${i},${j})">${w}</span>`).join('')}
+      </div>
+      <div class="ordre-feedback" id="of-${i}"></div>
+      <div class="correction-text" id="oc-${i}">Correction : ${o.answer}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('ordre-score').style.display='none';
+}
+buildOrdre();
+
+// Each zone stores an ordered list of {id, word}
+const ordreZones={};
+ordreData.forEach((_,i)=>ordreZones[i]=[]);
+
+function wordClick(i,j){
+  const word=document.getElementById(`ow-${i}-${j}`);
+  if(word.classList.contains('in-zone')){
+    // remove from zone
+    ordreZones[i]=ordreZones[i].filter(x=>x.id!==j);
+    word.classList.remove('in-zone');
+    document.getElementById(`ob-${i}`).appendChild(word);
+  } else {
+    // add to zone
+    ordreZones[i].push({id:j,word:word.dataset.word});
+    word.classList.add('in-zone');
+    document.getElementById(`oz-${i}`).appendChild(word);
+  }
+  document.getElementById(`of-${i}`).textContent='';
+  document.getElementById(`oz-${i}`).classList.remove('correct-zone','wrong-zone');
+}
+function zoneClick(i){/* handled by wordClick */}
+
+function checkOrdre(){
+  let score=0;
+  ordreData.forEach((o,i)=>{
+    const zone=document.getElementById(`oz-${i}`);
+    const words=[...zone.querySelectorAll('.ordre-word')].map(w=>w.dataset.word);
+    const composed=words.join(' ');
+    const fb=document.getElementById(`of-${i}`);
+    const corr=document.getElementById(`oc-${i}`);
+    zone.classList.remove('correct-zone','wrong-zone');
+    if(composed===o.answer){
+      score++;zone.classList.add('correct-zone');
+      fb.textContent='✔ Correct !';fb.style.color='#27ae60';
+    } else {
+      zone.classList.add('wrong-zone');
+      fb.textContent='✘ Pas tout à fait.';fb.style.color='#e74c3c';
+      corr.classList.add('visible');
+    }
+  });
+  const el=document.getElementById('ordre-score');
+  el.style.display='block';
+  el.textContent=`Score : ${score} / ${ordreData.length}`;
+  el.style.color=score===ordreData.length?'#27ae60':'#c0392b';
+}
+function resetOrdre(){ordreData.forEach((_,i)=>ordreZones[i]=[]);buildOrdre();}
+
+// ═══════════════════════════════════════════════════════
+// CONJUGAISON
+// ═══════════════════════════════════════════════════════
+const conjData=[
+  {before:"L'an prochain, nous ",after:" (partir – futur simple, nous) en Italie.",answer:"partirons",hint:"partir → futur, 1re pers. pluriel"},
+  {before:"Hier soir, elle ",after:" (finir – passé simple, elle) son roman en une heure.",answer:"finit",hint:"finir → passé simple, 3e pers. sing."},
+  {before:"Enfant, il ",after:" (jouer – imparfait, il) dans ce jardin tous les jours.",answer:"jouait",hint:"jouer → imparfait, 3e pers. sing."},
+  {before:"Dès que tu arriveras, tu ",after:" (appeler – futur simple, tu) ta mère.",answer:"appelleras",hint:"appeler → futur, 2e pers. sing. (attention au doublement du l)"},
+  {before:"Ils ",after:" (se lever – passé simple, ils) d'un bond et sortirent.",answer:"se levèrent",hint:"se lever → passé simple, 3e pers. pluriel"},
+  {before:"Si vous ",after:" (savoir – imparfait, vous) la vérité, vous seriez surpris.",answer:"saviez",hint:"savoir → imparfait, 2e pers. pluriel"},
+  {before:"Le roi ",after:" (mourir – passé simple, il) en 1715, après un long règne.",answer:"mourut",hint:"mourir → passé simple, 3e pers. sing."},
+  {before:"Chaque matin, les oiseaux ",after:" (chanter – imparfait, ils) à l'aube.",answer:"chantaient",hint:"chanter → imparfait, 3e pers. pluriel"},
+];
+
+function buildConj(){
+  const body=document.getElementById('conj-body');
+  body.innerHTML=conjData.map((c,i)=>`
+    <div class="conj-item">
+      <div class="conj-sentence">
+        ${i+1}. ${c.before}<input type="text" class="conj-input" id="ci-${i}" placeholder="…" autocomplete="off" spellcheck="false">${c.after}
+      </div>
+      <div class="conj-hint">💡 ${c.hint}</div>
+      <div class="conj-feedback" id="cf-${i}"></div>
+    </div>`).join('');
+  document.getElementById('conj-score').style.display='none';
+}
+buildConj();
+
+function normalize(s){return s.trim().toLowerCase();}
+function checkConj(){
+  let score=0;
+  conjData.forEach((c,i)=>{
+    const inp=document.getElementById(`ci-${i}`);
+    const fb=document.getElementById(`cf-${i}`);
+    inp.classList.remove('correct-inp','wrong-inp');
+    const val=normalize(inp.value);
+    if(!val){fb.textContent='⚠ Entre une réponse.';fb.style.color='#e74c3c';return;}
+    if(val===normalize(c.answer)){
+      score++;inp.classList.add('correct-inp');
+      fb.textContent='✔ Bonne forme !';fb.style.color='#27ae60';
+    } else {
+      inp.classList.add('wrong-inp');
+      fb.textContent=`✘ Réponse attendue : ${c.answer}`;fb.style.color='#e74c3c';
+    }
+    inp.disabled=true;
+  });
+  const pct=Math.round(score/conjData.length*100);
+  document.getElementById('conj-score').style.display='block';
+  document.getElementById('conj-score-text').textContent=`Score : ${score} / ${conjData.length} (${pct}%)`;
+  document.getElementById('conj-fill').style.width=pct+'%';
+}
+function resetConj(){buildConj();}
+
+// ═══════════════════════════════════════════════════════
+// SYSTÈME DE DIPLÔMES
+// ═══════════════════════════════════════════════════════
+
+// Suivi des scores par exercice
+const scores = {
+  qcm: null, dragdrop: null, lacunaire: null, rewrite: null,
+  vf: null, ordre: null, conjugaison: null
+};
+const maxScores = {
+  qcm: qcmData.length, dragdrop: ddData.length, lacunaire: fillSegments.filter(s=>s.type==='blank').length,
+  rewrite: rewriteData.length, vf: vfData.length, ordre: ordreData.length, conjugaison: conjData.length
+};
+const exerciseLabels = {
+  qcm:'QCM', dragdrop:'Glisser-déposer', lacunaire:'Texte à trous',
+  rewrite:'Réécriture', vf:'Vrai / Faux', ordre:'Remise en ordre', conjugaison:'Conjugaison'
+};
+
+const diplomesDef = [
+  {id:'premier_pas', medal:'🥉', name:'Premier pas', cond:'Termine ton premier exercice', check:()=>Object.values(scores).some(s=>s!==null)},
+  {id:'sans_faute_qcm', medal:'🎯', name:'Sans faute au QCM', cond:'8/8 au QCM', check:()=>scores.qcm===maxScores.qcm},
+  {id:'expert_imparfait', medal:'🌧️', name:'Maître de l\'imparfait', cond:'Score ≥ 80% en Vrai/Faux', check:()=>scores.vf!==null && scores.vf/maxScores.vf>=.8},
+  {id:'grammairien', medal:'📖', name:'Grammairien·ne', cond:'Tous les exercices complétés', check:()=>Object.values(scores).every(s=>s!==null)},
+  {id:'perfectionniste', medal:'🌟', name:'Perfectionniste', cond:'Score parfait dans 3 exercices ou plus', check:()=>Object.entries(scores).filter(([k,v])=>v!==null && v===maxScores[k]).length>=3},
+  {id:'conjugueur', medal:'✍️', name:'Conjugueur·se', cond:'7/8 ou plus en Conjugaison', check:()=>scores.conjugaison!==null && scores.conjugaison/maxScores.conjugaison>=.875},
+  {id:'champion_ordre', medal:'🔢', name:'Champion de l\'ordre', cond:'Score parfait en Remise en ordre', check:()=>scores.ordre===maxScores.ordre},
+  {id:'as_glisser', medal:'🤌', name:'As du glisser-déposer', cond:'Score parfait en Glisser-déposer', check:()=>scores.dragdrop===maxScores.dragdrop},
+  {id:'grand_maitre', medal:'🏆', name:'Grand Maître', cond:'100% dans TOUS les exercices', check:()=>Object.entries(scores).every(([k,v])=>v!==null && v===maxScores[k])},
+];
+
+const unlocked = new Set();
+
+function buildProgressBar(){
+  const grid = document.getElementById('gp-grid');
+  grid.innerHTML = Object.entries(scores).map(([key, val])=>{
+    const done = val!==null;
+    const label = val!==null ? `${val} / ${maxScores[key]}` : 'Non commencé';
+    const pct = val!==null ? Math.round(val/maxScores[key]*100) : 0;
+    return `<div class="gp-cell ${done?'done':''}">
+      <div class="gp-icon">${done?(pct===100?'✅':'📝'):'⬜'}</div>
+      <div class="gp-info">
+        <div class="gp-name">${exerciseLabels[key]}</div>
+        <div class="gp-val">${label}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // total
+  const totalPts = Object.entries(scores).reduce((a,[k,v])=>a+(v||0),0);
+  const totalMax = Object.values(maxScores).reduce((a,b)=>a+b,0);
+  const pct = Math.round(totalPts/totalMax*100)||0;
+  document.getElementById('gp-total-label').textContent = `${totalPts} / ${totalMax} pts`;
+  document.getElementById('gp-total-fill').style.width = pct+'%';
+}
+
+function buildDiplomes(){
+  const grid = document.getElementById('diplomes-grid');
+  grid.innerHTML = diplomesDef.map(d=>{
+    const ok = d.check();
+    const dateStr = ok ? (localStorage.getItem('dip_date_'+d.id) || new Date().toLocaleDateString('fr-FR')) : '';
+    return `<div class="diplome-card ${ok?'unlocked':''}" id="dip-${d.id}">
+      <div class="d-new-badge">NOUVEAU</div>
+      <div class="d-medal">${d.medal}</div>
+      <div class="d-name">${d.name}</div>
+      <div class="d-cond">${d.cond}</div>
+      <div class="d-date">${dateStr ? 'Obtenu le '+dateStr : ''}</div>
+    </div>`;
+  }).join('');
+}
+
+function checkDiplomes(){
+  diplomesDef.forEach(d=>{
+    if(!unlocked.has(d.id) && d.check()){
+      unlocked.add(d.id);
+      const dateStr = new Date().toLocaleDateString('fr-FR');
+      try{localStorage.setItem('dip_date_'+d.id, dateStr);}catch(e){}
+      // Marquer "nouveau"
+      setTimeout(()=>{
+        buildDiplomes();
+        const card = document.getElementById('dip-'+d.id);
+        if(card) card.classList.add('just-unlocked');
+        showModal(d);
+      }, 600);
+    }
+  });
+  buildProgressBar();
+  buildDiplomes();
+}
+
+function showModal(d){
+  document.getElementById('modal-medal').textContent = d.medal;
+  document.getElementById('modal-title').textContent = d.name;
+  document.getElementById('modal-sub').textContent = '🎉 Félicitations ! Tu as obtenu le diplôme « '+d.name+' ». '+d.cond+'.';
+  const overlay = document.getElementById('modal-overlay');
+  overlay.classList.add('visible');
+  // reset animation
+  const medalEl = document.getElementById('modal-medal');
+  medalEl.classList.remove('pop');
+  void medalEl.offsetWidth;
+  medalEl.classList.add('pop');
+}
+
+document.getElementById('modal-overlay').addEventListener('click', function(e){
+  if(e.target===this) this.classList.remove('visible');
+});
+
+// Patch check functions to record scores
+const _origCheckQcm = checkQcm;
+checkQcm = function(){
+  _origCheckQcm();
+  const el=document.getElementById('qcm-score-text');
+  if(el&&el.textContent){
+    const m=el.textContent.match(/(\d+)\s*\/\s*\d+/);
+    if(m){scores.qcm=parseInt(m[1]);}
+  }
+  checkDiplomes();
+};
+
+const _origCheckDd = checkDd;
+checkDd = function(){
+  _origCheckDd();
+  let s=0;
+  ddData.forEach((_,i)=>{const dz=document.getElementById('dz-'+i);if(dz&&dz.classList.contains('correct'))s++;});
+  scores.dragdrop=s;
+  checkDiplomes();
+};
+
+const _origCheckFill = checkFill;
+checkFill = function(){
+  _origCheckFill();
+  const el=document.getElementById('fill-score');
+  if(el&&el.textContent){const m=el.textContent.match(/(\d+)\s*\/\s*\d+/);if(m)scores.lacunaire=parseInt(m[1]);}
+  checkDiplomes();
+};
+
+const _origCheckVf = checkVf;
+checkVf = function(){
+  _origCheckVf();
+  const el=document.getElementById('vf-score-text');
+  if(el&&el.textContent){const m=el.textContent.match(/(\d+)\s*\/\s*\d+/);if(m)scores.vf=parseInt(m[1]);}
+  checkDiplomes();
+};
+
+const _origCheckOrdre = checkOrdre;
+checkOrdre = function(){
+  _origCheckOrdre();
+  const el=document.getElementById('ordre-score');
+  if(el&&el.textContent){const m=el.textContent.match(/(\d+)\s*\/\s*\d+/);if(m)scores.ordre=parseInt(m[1]);}
+  checkDiplomes();
+};
+
+const _origCheckConj = checkConj;
+checkConj = function(){
+  _origCheckConj();
+  const el=document.getElementById('conj-score-text');
+  if(el&&el.textContent){const m=el.textContent.match(/(\d+)\s*\/\s*\d+/);if(m)scores.conjugaison=parseInt(m[1]);}
+  checkDiplomes();
+};
+
+// Réécriture : on compte les corrections vues comme "complété"
+const _origToggleAll = toggleAll;
+toggleAll = function(){
+  _origToggleAll();
+  scores.rewrite = rewriteData.length;
+  checkDiplomes();
+};
+
+// Init
+buildProgressBar();
+buildDiplomes();
 </script>
 </body>
 </html>
